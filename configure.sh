@@ -1,6 +1,6 @@
 # Install dependencies
 sudo apt-get install libgflags-dev libsnappy-dev zlib1g-dev libbz2-dev liblz4-dev libzstd-dev
-mkdir third_party
+mkdir -p third_party
 git submodule update --recursive
 
 # Builf dependencies
@@ -11,16 +11,13 @@ make
 ## Google Marl
 cd ../marl
 git submodule update --init
-mkdir build
+mkdir -p build
 cd build
 cmake .. -DMARL_BUILD_EXAMPLES=1 -DMARL_BUILD_TESTS=1
 make
+## XXHASH
+cd ../../xxhash
+make
 ## RocksDB
 cd ../rocksdb
-mkdir build
-cd build
-cmake -DFORCE_SSE42=ON ..
 USE_SSE=1 make static_lib
-## XXHASH
-cd ../xxhash
-make
